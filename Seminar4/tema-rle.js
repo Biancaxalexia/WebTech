@@ -1,4 +1,5 @@
 const { readFileSync } = require("fs");
+const path = require("path");
 
 function runLengthEncode(str) {
   if (typeof str !== "string") {
@@ -26,7 +27,7 @@ function runLengthEncode(str) {
 
 function main() {
   try {
-    const fileContent = readFileSync("./input.txt", "utf8");
+    const fileContent = readFileSync(path.join(__dirname, "input.txt"), "utf8");
     const compressed = runLengthEncode(fileContent);
     console.log("RLE result:", compressed);
   } catch (err) {
