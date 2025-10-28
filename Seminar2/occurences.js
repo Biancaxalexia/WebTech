@@ -1,3 +1,4 @@
+//Exemplu
 function occurences(text, character) {
   let count = 0;
   for (var i = 0; i < text.length; i++) {
@@ -16,6 +17,7 @@ function occurences(text, character) {
 
 console.log(occurences("another text", "h"));
 
+//Exercitiu
 function createArray(...numbers) {
   return numbers;
 }

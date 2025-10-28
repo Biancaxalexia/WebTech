@@ -1,3 +1,4 @@
+//Exemplu
 function addToArray() {
   let args = arguments;
   let array = arg[0];
@@ -21,6 +22,7 @@ function addToArray(array, ...args) {
 let array2 = ["d"];
 console.log(addToArray(array2, "e", "f").join(", "));
 
+//Exercitiu
 function combineArrays(array1, array2) {
   if (array1.length !== array2.length) {
     return "Array-urile nu au aceeași lungime!";

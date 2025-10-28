@@ -1,3 +1,4 @@
+//Exemplu
 function checkDivisible(n, divisor) {
   if (n % divisor) {
     return false;
@@ -9,6 +10,7 @@ function checkDivisible(n, divisor) {
 console.log(checkDivisible(10, 2));
 console.log(checkDivisible(10, 3));
 
+//Exercitiu
 function countCharacters(str1, str2) {
   if (str1.length !== str2.length) {
     return -1;

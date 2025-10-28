@@ -1,3 +1,4 @@
+//Exemplu
 const checkPrime = (n) => {
   for (let i = 2; i <= Math.sqrt(n); i++) {
     if (!(n % i)) {
@@ -13,6 +14,7 @@ if (process.argv.length <= 3) {
   console.log(checkPrime(parseInt(process.argv[2])));
 }
 
+//Exercitiu
 function fibonacci(n) {
   if (n < 0) return "Număr invalid";
   if (n === 0) return 0;
