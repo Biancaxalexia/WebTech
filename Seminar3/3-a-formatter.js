@@ -1,3 +1,4 @@
+//Exemplu
 const formatString = (s, ...format) => {
   let modified = s;
   for (let i = 0; i < format.length; i++) {
@@ -12,6 +13,7 @@ console.log(
   formatString("this is a {0} string  and we've {1} it ", "nice", "modified")
 );
 
+//Exercitiu
 const formatString2 = (s, parameters) => {
   let modified = s;
   for (let key in parameters) {

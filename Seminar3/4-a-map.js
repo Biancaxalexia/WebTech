@@ -1,3 +1,4 @@
+//Exemplu
 const sampleArray = [1, 2, 3, 4, 5];
 
 const map = (array, transformation) => {
@@ -9,6 +10,7 @@ const map = (array, transformation) => {
 };
 console.log(map(sampleArray, (x) => x * 2));
 
+//Exercitiu
 const sampleArray2 = [1, 2, 3, 4, 5];
 const reduce = (array, reducer, initialValue) => {
   let result = initialValue;

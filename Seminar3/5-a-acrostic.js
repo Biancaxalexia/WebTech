@@ -1,3 +1,4 @@
+//Exemplu
 const sampleDictionary = [
   "the",
   "quick",
@@ -29,6 +30,7 @@ const checkAcrostic = (text, dictionary) => {
 
 console.log(checkAcrostic(sampleText, sampleDictionary));
 
+//Exercitiu
 const censorText = (text, dictionary) => {
   let result = text;
   dictionary.forEach((word) => {

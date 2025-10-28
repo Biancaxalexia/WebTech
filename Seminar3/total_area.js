@@ -1,3 +1,4 @@
+//Exemplu
 const getTotalArea = (squareDimensions) => {
   return squareDimensions
     .map((side) => {
@@ -13,6 +14,7 @@ const squareDimensions = [3, 5, 12, 3, 5, 3];
 const result = getTotalArea(squareDimensions);
 console.log("result: ", result);
 
+//Exercitiu
 const getSumOfDivisible = (numbers, divisor) => {
   return numbers
     .filter((number) => {

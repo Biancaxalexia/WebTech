@@ -1,3 +1,4 @@
+//Exemplu
 const sortObjects = (array, key) => {
   return array.sort((a, b) => {
     if (a[key] < b[key]) {
@@ -34,6 +35,7 @@ const laptops = [
 const result = sortObjects(laptops, "ram");
 console.log("result ", result);
 
+//Exercitiu
 const sortByKey = (array, key) => {
   return array.sort((a, b) => {
     if (a[key] < b[key]) {

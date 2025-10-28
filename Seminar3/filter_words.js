@@ -1,3 +1,4 @@
+//Exemplu
 const words = [
   "fox",
   "wolf",
@@ -29,6 +30,7 @@ const filterWords2 = (words, forbiddenWord, minLength) =>
 
 console.log(filterWords2(words, forbiddenWord, minLength));
 
+//Exercitiu
 const years = [2005, 2010, 1999, 1980, 2012];
 const currentYear = 2025;
 
