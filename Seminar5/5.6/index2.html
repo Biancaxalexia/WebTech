@@ -1,0 +1,41 @@
+<!-- Exercitiu -->
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Căutare resursă după ID</title>
+  </head>
+  <body>
+    <h1>Obține resursa după ID</h1>
+
+    <form id="idForm">
+      <label for="resId">ID resursă:</label>
+      <input type="number" id="resId" min="1" required />
+      <button type="submit">Caută</button>
+    </form>
+
+    <div id="rezultat" style="margin-top: 20px"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const apiUrl = "http://localhost:3000/resurse";
+
+      const form = document.getElementById("idForm");
+      const rezultatDiv = document.getElementById("rezultat");
+
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+
+        const id = document.getElementById("resId").value.trim();
+        if (!id) return;
+
+        try {
+          const response = await axios.get(`${apiUrl}/${id}`);
+          rezultatDiv.innerHTML = `<p>Resursa găsită: <strong>${response.data.nume}</strong></p>`;
+        } catch (err) {
+          rezultatDiv.innerHTML = `<p style="color:red;">Resursa cu ID ${id} nu a fost găsită!</p>`;
+        }
+      };
+    </script>
+  </body>
+</html>
