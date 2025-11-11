@@ -1,0 +1,35 @@
+<!-- Exercitiu -->
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Eveniment custom: nota student</title>
+  </head>
+  <body>
+    <h3>Vezi nota studentului:</h3>
+    <button id="notaStudent">Afișează nota</button>
+
+    <script>
+      const button = document.getElementById("notaStudent");
+
+      button.addEventListener("click", () => {
+        const calificativStudent = 9.5;
+        console.log(`Nota studentului este: ${calificativStudent}`);
+
+        const evenimentCustom = new CustomEvent("notaVizualizata", {
+          detail: { student: "Maria Popescu", nota: calificativStudent },
+        });
+
+        button.dispatchEvent(evenimentCustom);
+      });
+
+      button.addEventListener("notaVizualizata", (event) => {
+        console.log("Eveniment custom declanșat:");
+        console.log(
+          `Studentul ${event.detail.student} a avut nota ${event.detail.nota}`
+        );
+        button.style.backgroundColor = "#90ee90";
+      });
+    </script>
+  </body>
+</html>
