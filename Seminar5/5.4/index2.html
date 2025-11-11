@@ -8,9 +8,11 @@
   <body>
     <h3>Vezi nota studentului:</h3>
     <button id="notaStudent">Afișează nota</button>
+    <p id="afisareNota"></p>
 
     <script>
       const button = document.getElementById("notaStudent");
+      const afisareNota = document.getElementById("afisareNota");
 
       button.addEventListener("click", () => {
         const calificativStudent = 9.5;
@@ -28,6 +30,9 @@
         console.log(
           `Studentul ${event.detail.student} a avut nota ${event.detail.nota}`
         );
+
+        afisareNota.textContent = `Studentul ${event.detail.student} a avut nota ${event.detail.nota}`;
+
         button.style.backgroundColor = "#90ee90";
       });
     </script>
