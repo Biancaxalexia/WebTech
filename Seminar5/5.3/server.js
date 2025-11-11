@@ -43,6 +43,10 @@ app.get("/obiect", (req, res) => {
   });
 });
 
+app.get("/", (req, res) => {
+  res.send("Bine ai venit la serverul meu!");
+});
+
 app.listen(3000, () => {
   console.log("Serverul rulează pe http://localhost:3000");
 });
