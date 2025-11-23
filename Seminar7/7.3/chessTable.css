@@ -1,0 +1,45 @@
+/*Exercitiu*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #444;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 60px);
+    grid-template-rows: repeat(8, 60px);
+    border: 6px solid #000;
+}
+
+.board div {
+    width: 60px;
+    height: 60px;
+}
+
+.board div:nth-child(odd) {
+    background: #eee;     
+}
+
+.board div:nth-child(even) {
+    background: #000;    
+}
+
+.board div:nth-child(8n + 1),
+.board div:nth-child(8n + 2),
+.board div:nth-child(8n + 3),
+.board div:nth-child(8n + 4),
+.board div:nth-child(8n + 5),
+.board div:nth-child(8n + 6),
+.board div:nth-child(8n + 7),
+.board div:nth-child(8n + 8) {
+    background: revert;
+}
