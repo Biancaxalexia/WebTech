@@ -1,9 +1,23 @@
 //Exemplu
 "use strict";
 const express = require("express");
-const sequelize = require("./sequelize"); 
+const sequelize = require("./config/sequelize"); 
 
 const app = express();
+
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.json());
+
+app.use("/api", require("./routes/employees"))
+
+app.use((err, req, res, next) => {
+  res.status(500).json({ error: "Something broke!" });
+});
+
 app.set("port", process.env.PORT || 7000);
 
 app.listen(app.get("port"), async () => {
