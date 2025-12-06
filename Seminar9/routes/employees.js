@@ -8,6 +8,7 @@ router
   .route("/employees")
   .get(async (req, res) => {
     try {
+        //Exercitiu
       const { name } = req.query;
       const { sorted } = req.query;
 
