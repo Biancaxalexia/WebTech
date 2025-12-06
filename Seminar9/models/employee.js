@@ -12,6 +12,7 @@ const Employee = sequelize.define(
     },
     firstName: {
       type: DataTypes.STRING,
+      //Exercitiu
       validate: {
         len: [3, 10], 
       },
@@ -20,6 +21,7 @@ const Employee = sequelize.define(
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
+      //Exercitiu
       validate: {
         len: [3, 10], 
       },
