@@ -12,16 +12,23 @@ const Employee = sequelize.define(
     },
     firstName: {
       type: DataTypes.STRING,
+      validate: {
+        len: [3, 10], 
+      },
       // allowNull: false,
     },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [3, 10], 
+      },
     },
     email: {
       type: DataTypes.STRING,
       validate: {
         isEmail: true,
+        len: [3, 10],
       },
     },
     birthYear: {
