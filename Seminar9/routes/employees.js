@@ -69,6 +69,7 @@ router
       return res.status(500).json(err);
     }
   })
+  //Exercitiu
   .delete(async (req, res) => {
     try {
       const employee = await Employee.findByPk(req.params.id);
