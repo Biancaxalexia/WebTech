@@ -90,7 +90,8 @@ app.post("/universities/:universityId/students", async (req, res, next) => {
   }
 });
 
-//GET all the students from a university using include
+//Exercitiu
+//GET all the students from a university
 app.get("/universities/:universityId/students", async (req, res, next) => {
   try {
     const university = await University.findByPk(req.params.universityId, {
@@ -129,6 +130,7 @@ app.put("/universities/:universityId/students/:studentId", async (req, res, next
   }
 });
 
+//Exercitiu
 //GET a student by id from a university by id
 app.get('/universities/:universityId/students/:studentId', async (req, res, next) => {
   try {
@@ -140,6 +142,28 @@ app.get('/universities/:universityId/students/:studentId', async (req, res, next
         res.status(202).json(student)
       } else {
         res.status(404).json({ message: '404 - Student Not Found!' })
+      }
+    } else {
+      res.status(404).json({ message: '404 - University Not Found!' })
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Exercitiu
+//DELETE a student from a university
+app.delete('/universities/:universityId/students/:studentId', async (req, res, next) => {
+  try {
+    const university = await University.findByPk(req.params.universityId)
+    if (university) {
+      const students = await university.getStudents({ id: req.params.studentId })
+      const student = students.shift()
+      if (student) {
+        await student.destroy()
+        res.status(202).json({ message: 'Student deleted!'})
+      } else {
+        res.status(404).json({ message: '404 - Student Not Found' })
       }
     } else {
       res.status(404).json({ message: '404 - University Not Found!' })
