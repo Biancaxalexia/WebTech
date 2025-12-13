@@ -90,8 +90,8 @@ app.post("/universities/:universityId/students", async (req, res, next) => {
     } else {
       res.status(404).json({ message: '404 - University Not Found'});
     }
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -107,8 +107,8 @@ app.get("/universities/:universityId/students", async (req, res, next) => {
     } else {
       res.status(404).json({ message: '404 - University Not Found!'});
     }
-  } catch(error) {
-    next(error);
+  } catch(err) {
+    next(err);
   }
 });
 
@@ -130,8 +130,8 @@ app.put("/universities/:universityId/students/:studentId", async (req, res, next
     } else {
       res.status(404).json({ message: '404 - University Not Found!'});
     }
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -198,8 +198,8 @@ application.get('/universities/:universityId/courses/:courseId/enrollements', as
     } else {
       response.sendStatus(404);
     }
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -222,8 +222,8 @@ application.post('/universities/:universityId/courses/:courseId/enrollements/:st
     } else {
       response.sendStatus(404);
     }
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -246,8 +246,8 @@ application.post('/universities/:universityId/courses/:courseId/enrollements/:st
     } else {
       response.sendStatus(404);
     }
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 });
 
@@ -272,7 +272,78 @@ application.get('/universities/:universityId/students/:studentId/enrollements', 
     } else {
       response.sendStatus(404);
     }
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Data import
+application.post('/', async (request, response, next) => {
+  try {
+    const registry = {};
+    for (let u of request.body) {
+      const university = await University.create(u);
+      for (let s of u.students) {
+        const student = await Student.create(s);
+        registry[s.key] = student;
+        university.addStudent(student);
+      }
+      for (let c of u.courses) {
+        const course = await Course.create(c);
+        registry[c.key] = course;
+        university.addCourse(course);
+      }
+      for (let e of u.enrollements) {
+        registry[e.courseKey].addStudent(registry[e.studentKey]);
+        await registry[e.courseKey].save();
+      }
+      await university.save();
+    }
+    response.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//Exercitiu
+//Data export
+application.get('/', async (request, response, next) => {
+  try {
+    const result = [];
+    for (let u of await University.findAll()) {
+      const university = {
+        name: u.name,
+        students: [],
+        courses: [],
+        enrollements: []
+      };
+      for (let c of await u.getCourses()) {
+        university.courses.push({
+          key: c.id,
+          name: c.name
+        });
+        for (let s of await c.getStudents()) {
+          university.enrollements.push({
+            courseKey: c.id,
+            studentKey: s.id
+          });
+        }
+      }
+      for (let s of await u.getStudents()) {
+        university.students.push({
+          key: s.id,
+          firstName: s.firstName,
+          lastName: s.lastName
+        });
+      }
+      result.push(university);
+    }
+    if (result.length > 0) {
+      response.json(result);
+    } else {
+      response.sendStatus(204);
+    }
+  } catch (err) {
+    next(err);
   }
 });
