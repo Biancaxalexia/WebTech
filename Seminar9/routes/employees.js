@@ -24,6 +24,7 @@ router
             { lastName: { [Op.like]: `%${name}%` } },
         ],
         }: undefined,*/
+    //Exercitiu
     order: sorted ? [[sorted, "ASC"]] : undefined,
   });
       return res.status(200).json(employees);
