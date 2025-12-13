@@ -178,6 +178,104 @@ app.delete('/universities/:universityId/students/:studentId', async (req, res, n
   }
 });
 
+//GET the list of courses
+application.get('/universities/:universityId/courses', async (request, response, next) => {
+  try {
+    const university = await University.findByPk(request.params.universityId);
+    if (university) {
+      const courses = await university.getCourses();
+      if (courses.length > 0) {
+        response.json(courses);
+      } else {
+        response.sendStatus(204);
+      }
+    } else {
+      response.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//GET a course by id
+application.get('/university/:universityId/courses/:courseId', async (request, response, next) => {
+  try {
+    const university = await University.findByPk(request.params.universityId);
+    if (university) {
+      const courses = await university.getCourses({id: request.params.courseId});
+      const course = courses.shift();
+      if (course) {
+        response.json(course);
+      } else {
+        response.sendStatus(404);
+      }
+    } else {
+      response.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//POST a new course
+application.post('/universities/:universityId/courses', async (request, response, next) => {
+  try {
+    const university = await University.findByPk(request.params.universityId);
+    if (university) {
+      const course = await Course.create(request.body);
+      university.addCourse(course);
+      await university.save();
+      response.status(201).location(course.id).send();
+    } else {
+      response.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//PUT to update a course
+application.put('/universities/:universityId/courses/:courseId', async (request, response, next) => {
+  try {
+    const university = await University.findByPk(request.params.universityId);
+    if (university) {
+      const courses = await university.getCourses({id: request.params.courseId});
+      const course = courses.shift();
+      if (course) {
+        await course.update(request.body);
+        response.sendStatus(204);
+      } else {
+        response.sendStatus(404);
+      }
+    } else {
+      response.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+//DELETE a course
+application.delete('/universities/:universityId/courses/:courseId', async (request, response, next) => {
+  try {
+    const university = await University.findByPk(request.params.universityId);
+    if (university) {
+      const courses = await university.getCourses({id: request.params.courseId});
+      const course = courses.shift();
+      if (course) {
+        await course.destroy();
+        response.sendStatus(204);
+      } else {
+        response.sendStatus(404);
+      }
+    } else {
+      response.sendStatus(404);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 //GET the list of enrolled students to a course
 application.get('/universities/:universityId/courses/:courseId/enrollements', async (request, response, next) => {
   try {
